@@ -1,3 +1,8 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+# Gilfoyle
+Gilfoyle is a helpful chat bot based on the [hubot](https://hubot.github.com/) framework.
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+## Env variables
+- Get the [openshift client tools](https://developers.openshift.com/managing-your-applications/client-tools.html)
+- ```rhc setup```
+- ```rhc env set -a gilfoyle KEY=value```
+- ```rhc env list -a gilfoyle```
