@@ -17,7 +17,7 @@
     "node": ">= 0.10.x"
   },
   "dependencies": {
-    "hubot": ">= 2.6.0 < 3.0.0",
+    "hubot": "^2.19.0",
     "hubot-redis-brain": "0.0.3",
     "hubot-scripts": ">= 2.5.0 < 3.0.0",
     "hubot-shipit": "^0.2.0",
