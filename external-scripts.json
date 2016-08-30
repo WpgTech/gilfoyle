@@ -1,1 +1,5 @@
-[]
+[
+  "hubot-redis-brain",
+  "hubot-shipit",
+  "hubot-stache"
+]
