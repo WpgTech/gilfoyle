@@ -1,9 +1,7 @@
 language: node_js
 node_js:
 - '0.10'
-before_script:
-- npm install
-- npm run test
+
 deploy:
   provider: openshift
   user: myjc.niv@gmail.com
@@ -13,3 +11,4 @@ deploy:
   domain: jordanjs
   on:
     repo: WpgTech/gilfoyle
+    branch: master
