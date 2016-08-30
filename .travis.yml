@@ -1,17 +1,14 @@
 language: node_js
-
 node_js:
-  - '0.10'
-
+- '0.10'
 before_script:
-  -  npm install
-  -  npm run test
-
+- npm install
+- npm run test
 deploy:
   provider: openshift
   user: myjc.niv@gmail.com
   password:
-    secure: xMPY2KsJbBPN9OM/L3NKpYSGDh2EDuH6ltEQsqKq5fDFtqfNY3BAv2a1VWxvK4smIccGjrSIQpPbC0TtkBEbewFGqGDYZTAovPnP/DSCMIbf5KLo9gUKL73jRezbUEswtc8djeqC9JRsNiPyQ8c0gF1PZ2PEYvJ60TDOn5nm0vz7hJ7LPpHYsb1/Tvm8k1PW866UpNsMHEjDoVQPsiuKw12nXe4kBKujlxYFId3Q+R9TU1ohe5SIBo2gWO3YzIgfmKFkDJ8rV7zOjiZktgGA9gxOrAanYmghx7ohnOUWwUIzHSbqb3fQdtkBc7f//uFGyxXrucEw+nMTy6WxsX8E9Ii8mjrEOD4JUXlWtQPWXxAAwtl4hsD1S74POSW+kVKEAFO2c6U2f7f39HbKSaCmgVAkZMI5d0uDLU2z1iWztWk/wYSqfK79a593Ok2t52txeXwDE8zc7xkzK/TxZAmBQ5GBt5ipmDQhRw3mOth8+PuC1A/kvrcdDZtTMaMoIY3SD1Bt2CCLgzIBO+QcLsC20qKRvoueLdKqDNV7BJBdrOXWaj+RYTcZFyX8szKxVmD7yArUjAg7mTGcwuj5SsomtUVp6LKyFwpZZ2UK9XpbQSDUkNOjwT5UZxidw9XqXlINqiA5VrmkmGzcKtw9mLH9XT2znDq7IbTAlMFoot2xTcM=
+    secure: WED6+Jz6I/nNSs6v3B4WB8osc4hMUsovVVBWRyqwW1aX2Wq50p7Sw3gQM9GwvEnO4UZWxfZGwnJlizdwu4IhbWgqptCWZQrQ8L8WOG6k0PbaqH08JBk85c+GdKuwUw/qw2FSqzcjxafOJ/dJ0Qz3G1NjILfYEzGQJFo9p31BH6XZbt1kQOpVOrkDGnxQ4lZ0JVPWWauwMByS5LQq+vgIclF09fw+0hJLK7+/yZQ6tt/DVBdioXstEA2NYxT4W2yXZvU1zN520EwJPnM5KKyKdOv6E4218OBFZBueZ2qoAjPVnQm8+uKSTf73eE2huIHDyg265gTdSDNE/C4NAhQDa0UJFKRwqUSVp77uetrcDf0RuASMxWNRhRaMlFEjlC6msYoLu0eXKk488wOX7/DQMjyqJIB0rWjXkzb3qNHJJQKSXkd9cyHzuYquO0P8HkWwNMk7Eew7kVmzkP+iorN6y7n2tmqr5V0fFzb4VWzvcAo7PI6RhszRLA7GZ12evOyDws+ch3WKx2GKrReMfuc8AB0lPkoWUKBelH07cIy9YSS2wZG+832qjAnoz9xY0c5/94qxz4O8Bc0gX01UC82ewPTQ/+/mE4YspL6cWRfzjMbWUv+t9VbkHanqLy+1WVcrnri4F1k3Kk13PRdE7KKueQ0xPeMR/+UhyzeW7Z2BYDk=
   app: gilfoyle
   domain: jordanjs
   on:
