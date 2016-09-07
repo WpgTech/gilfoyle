@@ -20,5 +20,5 @@ services:
   redis:
     image: "redis"
     volumes:
-      - /opt/data/redis:/data
+      - /opt/data/redis/hubot:/data
     restart: always
