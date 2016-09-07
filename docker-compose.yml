@@ -1,0 +1,24 @@
+version: "2"
+services:
+  hubot:
+    build: .
+    depends_on:
+      - "redis"
+    links:
+      - "redis"
+    ports:
+      - "8001:8080"
+    env_file:
+      - ".env"
+    environment:
+      NODE_ENV: "production"
+      REDIS_URL: "redis://redis:6379"
+      HUBOT_SLACK_EXIT_ON_DISCONNECT: "true"
+    command: "/app/bin/hubot -a slack"
+    restart: always
+  
+  redis:
+    image: "redis"
+    volumes:
+      - /opt/data/redis/hubot:/data
+    restart: always

@@ -1,0 +1,13 @@
+[Unit]
+Description=Gilfoyle Hubot
+Requires=docker.service
+After=docker.service
+BindsTo=docker.service
+
+[Service]
+WorkingDirectory=/opt/hubot/gilfoyle
+ExecStart=/usr/local/bin/docker-compose up --force-recreate
+ExecStop=/usr/local/bin/docker-compose down
+
+[Install]
+WantedBy=default.target
