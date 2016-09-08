@@ -1,16 +1,17 @@
 # Gilfoyle
 Gilfoyle is a helpful chat bot based on the [hubot](https://hubot.github.com/) framework.
 
-
-## Production deploy
-- Ensure that `docker` and `docker-compose` are installed on the production server
+## Server environment setup:
+- Ensure that `docker` and `docker-compose` are installed and running
 - Create dir for redis `mkdir -p /opt/data/redis`
-- git clone/update repo on server
-- Add `.env` file to repo directory with necessary environment vars. See `example.env`.
-- launch: `docker-compose up -d`
+- Clone the repo `mkdir -p /opt/hubot && git clone https://github.com/WpgTech/gilfoyle.git /opt/hubot/gilfoyle`
+- Add `.env` file to `/opt/hubot/gilfoyle` with necessary environment vars. See `example.env`
+- Install the systemd init script `shell/gilfoyle.service` to `/etc/systemd/system/gilfoyle.service`
+- Enable the service `systemctl enable gilfoyle.service`
+- Start the bot `systemctl start gilfoyle.service`
 
-## Env variables
-- Get the [openshift client tools](https://developers.openshift.com/managing-your-applications/client-tools.html)
-- ```rhc setup```
-- ```rhc env set -a gilfoyle KEY=value```
-- ```rhc env list -a gilfoyle```
+## Deploy new code:
+- SSH to the server, switch to the webapps user `su - webapps`
+- Add/Update any new environment variables in `/opt/hubot/gilfoyle/.env`
+- `cd /opt/hubot/gilfoyle && git pull origin master`
+- Restart the bot `sudo systemctl restart gilfoyle.service`

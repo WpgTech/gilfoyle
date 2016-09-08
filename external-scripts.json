@@ -1,6 +1,5 @@
 [
-  "hubot-redis-brain",
-  "hubot-shipit",
-  "hubot-stache",
-  "hubot-twitterstream-script"
+    "hubot-redis-brain",
+    "hubot-shipit",
+    "hubot-stache"
 ]
