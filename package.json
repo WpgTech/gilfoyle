@@ -1,32 +1,34 @@
 {
-    "name": "gilfoyle",
-    "version": "1.0.0",
-    "description": "A helpful chat bot based on hubot",
-    "keywords": [
-        "Hubot",
-        "Node.js"
-    ],
-    "contributors": [
-        "Jordan Neufeld <jordan@neufeldtech.com> (http://www.neufeldtech.com)"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/WpgTech/"
-    },
-    "engines": {
-        "node": ">= 0.10.x"
-    },
-    "dependencies": {
-        "hubot": "^2.19.0",
-        "hubot-redis-brain": "0.0.3",
-        "hubot-scripts": ">= 2.5.0 < 3.0.0",
-        "hubot-shipit": "^0.2.0",
-        "hubot-slack": "^4.0.2",
-        "hubot-stache": "0.0.4",
-        "hubot-twitterstream-script": "neufeldtech/hubot-twitterstream-script"
-    },
-    "scripts": {
-        "start": "bin/hubot",
-        "test": "echo 'wewt this is a test'"
-    }
+  "name": "gilfoyle",
+  "version": "1.0.0",
+  "description": "A helpful chat bot based on hubot",
+  "keywords": [
+    "Hubot",
+    "Node.js"
+  ],
+  "contributors": [
+    "Jordan Neufeld <jordan@neufeldtech.com> (http://www.neufeldtech.com)"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WpgTech/"
+  },
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "hubot": "^2.19.0",
+    "hubot-redis-brain": "0.0.3",
+    "hubot-scripts": ">= 2.5.0 < 3.0.0",
+    "hubot-shipit": "^0.2.0",
+    "hubot-slack": "^4.0.2",
+    "hubot-stache": "0.0.4",
+    "hubot-twitterstream-script": "neufeldtech/hubot-twitterstream-script",
+    "twit": "^2.2.4"
+  },
+  "scripts": {
+    "start": "bin/hubot",
+    "test": "echo 'wewt this is a test'"
+  }
 }
