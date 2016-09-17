@@ -9,7 +9,7 @@ from fabric.contrib.console import confirm
 env.forward_agent = True
 
 def deploy():
-    result=run("uname -a")
+    result=run("uname -r")
 
     if result.succeeded:
       print "[PASSED] Connecting to remote server "+env.host_string
@@ -22,4 +22,4 @@ def deploy():
     local_dir = os.path.dirname(os.path.realpath(__file__))
     print("Copying docker-compose.yml to server")
     put(local_dir + "/docker-compose.yml", '/opt/hubot/gilfoyle/')
-    run('sudo systemctl restart gilfoyle')
+    run('sudo systemctl restart gilfoyle.service')
