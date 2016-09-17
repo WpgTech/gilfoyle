@@ -1,7 +1,7 @@
 version: "2"
 services:
   hubot:
-    build: .
+    image: wpgtech/gilfoyle:latest
     depends_on:
       - "redis"
     links:

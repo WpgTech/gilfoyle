@@ -29,6 +29,6 @@
   },
   "scripts": {
     "start": "bin/hubot",
-    "test": "echo 'wewt this is a test'"
+    "test": "NODE_ENV=development npm install && echo 'wewt this is a test'"
   }
 }

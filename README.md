@@ -15,3 +15,14 @@ Gilfoyle is a helpful chat bot based on the [hubot](https://hubot.github.com/) f
 - Add/Update any new environment variables in `/opt/hubot/gilfoyle/.env`
 - `cd /opt/hubot/gilfoyle && git pull origin master`
 - Restart the bot `sudo systemctl restart gilfoyle.service`
+
+
+#to build it
+docker build . -t gilfoyle
+
+#to test it
+docker run gilfoyle /usr/local/bin/npm test
+
+
+#to run it (interactively)
+docker run -it --env-file .env gilfoyle

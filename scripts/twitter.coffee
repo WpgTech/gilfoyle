@@ -25,16 +25,16 @@ async = require "async"
 module.exports = (robot) ->
   #user-scope auth (needed for streams)
   TU = new Twit(
-    consumer_key: process.env.TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+    consumer_key: process.env.TWITTER_CONSUMER_KEY || 'foo',
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'bar',
+    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY || 'foo',
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || 'bar'
     )
 
   #App-scope auth (higher rate limits, but no streams)
   TA = new Twit(
-    consumer_key: process.env.TWITTER_CONSUMER_KEY,
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    consumer_key: process.env.TWITTER_CONSUMER_KEY || 'foo',
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'bar',
     app_only_auth: true
     )
 
@@ -42,7 +42,7 @@ module.exports = (robot) ->
     robot.logger.error 'TWITTER AUTH ERROR', err.stack
     return
   ).then (result) ->
-    robot.logger.info 'TWITTER AUTH SUCCESS'
+    # robot.logger.info "TWITTER AUTH RESULT: #{JSON.stringify result}" if result 
     return
   
   getUserTimeline = (user, since_id, count, cb) ->
