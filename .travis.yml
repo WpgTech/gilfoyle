@@ -6,6 +6,7 @@ services:
 install: docker build -t gilfoyle .
 script: docker run gilfoyle npm test
 deploy:
+  provider: script
   script: shell/deploy.sh
   on:
     repo: WpgTech/gilfoyle
