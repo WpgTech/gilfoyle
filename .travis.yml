@@ -3,6 +3,9 @@ python:
 - '2.7'
 services:
 - docker
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y fabric
 install: docker build -t gilfoyle .
 script: docker run gilfoyle npm test
 deploy:
