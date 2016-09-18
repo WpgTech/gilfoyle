@@ -6,6 +6,7 @@ BindsTo=docker.service
 
 [Service]
 WorkingDirectory=/opt/hubot/gilfoyle
+ExecStartPre=/usr/local/bin/docker-compose pull
 ExecStart=/usr/local/bin/docker-compose up
 ExecStop=/usr/local/bin/docker-compose down
 
