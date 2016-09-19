@@ -10,7 +10,7 @@ install: docker build -t gilfoyle .
 script: docker run gilfoyle npm test
 deploy:
   provider: script
-  script: shell/deploy.sh
+  script: fab --disable-known-hosts -f fabfile.py --hosts $SSH_HOST -u $SSH_USER -p $SSH_PASSWORD deploy
   on:
     repo: WpgTech/gilfoyle
     branch: master
