@@ -25,16 +25,16 @@ async = require "async"
 module.exports = (robot) ->
   #user-scope auth (needed for streams)
   TU = new Twit(
-    consumer_key: process.env.TWITTER_CONSUMER_KEY || 'foo',
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'bar',
-    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY || 'foo',
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET || 'bar'
+    consumer_key: process.env.HUBOT_TWITTER_CONSUMER_KEY || 'foo',
+    consumer_secret: process.env.HUBOT_TWITTER_CONSUMER_SECRET || 'bar',
+    access_token: process.env.HUBOT_TWITTER_ACCESS_TOKEN_KEY || 'foo',
+    access_token_secret: process.env.HUBOT_TWITTER_ACCESS_TOKEN_SECRET || 'bar'
     )
 
   #App-scope auth (higher rate limits, but no streams)
   TA = new Twit(
-    consumer_key: process.env.TWITTER_CONSUMER_KEY || 'foo',
-    consumer_secret: process.env.TWITTER_CONSUMER_SECRET || 'bar',
+    consumer_key: process.env.HUBOT_TWITTER_CONSUMER_KEY || 'foo',
+    consumer_secret: process.env.HUBOT_TWITTER_CONSUMER_SECRET || 'bar',
     app_only_auth: true
     )
 

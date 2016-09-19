@@ -34,8 +34,14 @@ def deploy():
       sys.exit(1)
   
     local_dir = os.path.dirname(os.path.realpath(__file__))
-    print("Copying docker-compose.yml to server")
-    put(local_dir + "/docker-compose.yml", '/opt/hubot/gilfoyle/')
+    print("Copying docker-compose.yml to remote server")
+    put(local_dir + "/docker-compose.yml", "/opt/hubot/gilfoyle/")
+
+    print("Grabbing hubot env variables and building .env file")
+    local("printenv | grep -i hubot &> .env")
+
+    print("Copying .env to remote server")
+    put(local_dir + "/.env", "/opt/hubot/gilfoyle/")
 
     with cd('/opt/hubot/gilfoyle'):
       print("Pulling new docker image on remote server")
