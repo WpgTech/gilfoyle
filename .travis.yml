@@ -8,6 +8,7 @@ before_install:
 - sudo apt-get install -y fabric
 install: docker build -t gilfoyle .
 script: docker run gilfoyle npm test
+before_deploy: printenv | grep HUBOT &> .env
 deploy:
   provider: script
   script: fab --disable-known-hosts -f fabfile.py --hosts $SSH_HOST -u $SSH_USER -p $SSH_PASSWORD deploy --set DOCKER_USER=$DOCKER_USER,DOCKER_PASS=$DOCKER_PASS 2> /dev/null 
