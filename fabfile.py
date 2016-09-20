@@ -38,7 +38,7 @@ def deploy():
     put(local_dir + "/docker-compose.yml", "/opt/hubot/gilfoyle/")
 
     print("Copying .env to remote server")
-    put("/tmp/.env", "/opt/hubot/gilfoyle/")
+    put(local_dir + "/.env", "/opt/hubot/gilfoyle/")
 
     with cd('/opt/hubot/gilfoyle'):
       print("Pulling new docker image on remote server")

@@ -21,4 +21,4 @@ module.exports = (robot) ->
   robot.respond /how many pugs are there/i, (msg) ->
     msg.http("http://pugme.herokuapp.com/count")
       .get() (err, res, body) ->
-        msg.send "There are #{JSON.parse(body).pug_count} pugs."
+        msg.send "There are #{JSON.parse(body).pug_count} pugs!"
