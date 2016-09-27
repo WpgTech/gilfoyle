@@ -9,8 +9,7 @@
 #
 # Commands:
 #   hubot pug me - Receive a pug
-#   hubot pug bomb N - get N pugs
-
+#   hubot how many pugs are there
 module.exports = (robot) ->
 
   robot.respond /pug me/i, (msg) ->
