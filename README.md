@@ -31,9 +31,9 @@ It's easy to get started, follow the **hello world** example below
 - Open up `src/jokes.coffee`.
 - In the below code, when someone says `@gilfoyle i am tired`, he will respond with `Have a coffee ☕️`.
 ```
-  module.exports = (robot) ->
-    robot.respond /i am tired/i, (msg) ->
-      msg.send "Have a coffee :coffee:"
+module.exports = (robot) ->
+  robot.respond /i am tired/i, (msg) ->
+    msg.send "Have a coffee :coffee:"
 ```
 - Let's add to the script below. We'll add a listener so that when Gilfoyle **hears** anyone say `McDonalds`, he will insist that he needs a big mac.
 ```
