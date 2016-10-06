@@ -1,4 +1,5 @@
 # <img src="https://raw.githubusercontent.com/WpgTech/gilfoyle/master/docs/gilfoyle.jpg" width="35px"/> Gilfoyle
+[![Build Status](https://travis-ci.org/WpgTech/gilfoyle.svg?branch=master)](https://travis-ci.org/WpgTech/gilfoyle)
 
 Gilfoyle is a helpful chat bot that lives in the [Prairie Tech Slack instance](http://slack.prdcdeliver.com).
 
