@@ -2,5 +2,6 @@
     "hubot-redis-brain",
     "hubot-shipit",
     "hubot-stache",
-    "hubot-twitterstream-script"
+    "hubot-twitterstream-script",
+    "hubot-wpgtransit"
 ]
