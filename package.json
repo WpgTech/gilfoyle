@@ -24,7 +24,8 @@
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^4.1.0",
     "hubot-stache": "0.0.4",
-    "hubot-twitterstream-script": "neufeldtech/hubot-twitterstream-script"
+    "hubot-twitterstream-script": "neufeldtech/hubot-twitterstream-script",
+    "hubot-wpgtransit": "^0.1.0"
   },
   "scripts": {
     "start": "bin/hubot",
