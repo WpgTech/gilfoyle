@@ -19,13 +19,14 @@
   "dependencies": {
     "async": "^2.0.1",
     "hubot": "^2.19.0",
+    "hubot-help": "^0.2.0",
     "hubot-redis-brain": "0.0.3",
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^4.1.0",
-    "hubot-stache": "0.0.4",
+    "hubot-stache": "^0.1.0",
     "hubot-twitterstream-script": "neufeldtech/hubot-twitterstream-script",
-    "hubot-wpgtransit": "^0.1.0"
+    "hubot-wpgtransit": "^0.1.1"
   },
   "scripts": {
     "start": "bin/hubot",

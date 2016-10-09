@@ -3,5 +3,6 @@
     "hubot-shipit",
     "hubot-stache",
     "hubot-twitterstream-script",
-    "hubot-wpgtransit"
+    "hubot-wpgtransit",
+    "hubot-help"
 ]
