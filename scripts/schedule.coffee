@@ -11,7 +11,7 @@
 # Commands:
 #   hubot who is speaking now? - Displays all presenters currently speaking
 #	hubot who is speaking next? - Displays all presenters speaking next
-#	hubot schedule (day)- Displays full schedule for requested day
+#	hubot schedule (Wednesday|Thursday)- Displays full schedule for requested day
 #
 # Author:
 #  Derek Richard
@@ -75,15 +75,18 @@ formatData = (data) ->
 		schedule += t.print() + "\n"
 	return schedule
 
-daySchedule = (msg) ->
-	day = msg.match[1].replace /\w\S*/g, (txt) -> 
-		return txt.charAt(0).toUpperCase() + txt.substr(1,2).toLowerCase()
-	dayDisplay = if day=='Wed' then "Wednesday" else "Thursday"
-	buildScheduleJSON (scheduleData) ->
-		async.filter scheduleData, (timeslot, cb) ->
-			cb null, timeslot.starttime.format('ddd') == day
-		, (err, results) ->
-			msg.send "*Daily Schedule for #{dayDisplay}*```#{formatData(results)}```"
+daySchedule = (msg, name) ->
+	if msg.match[1].search(/(Wed|Thu)\w*/i) >= 0
+		day = msg.match[1].replace /\w\S*/g, (txt) -> 
+			return txt.charAt(0).toUpperCase() + txt.substr(1,2).toLowerCase()
+		dayDisplay = if day=='Wed' then "Wednesday" else "Thursday"
+		buildScheduleJSON (scheduleData) ->
+			async.filter scheduleData, (timeslot, cb) ->
+				cb null, timeslot.starttime.format('ddd') == day
+			, (err, results) ->
+				msg.send "*Daily Schedule for #{dayDisplay}*```#{formatData(results)}```"
+	else
+		msg.send "Uhh, the conference is only Wednesday and Thursday. You can ask me for something like `#{name} schedule wednesday`"
 
 currentSpeakers = (msg) ->
 	now = new moment()
@@ -106,8 +109,8 @@ nextSpeakers = (msg) ->
 			msg.send "There are no upcoming sessions"
 
 module.exports = (robot) ->
-	robot.respond /schedule (Wed|Thu)\w*/i, (msg) ->
-  		daySchedule(msg)
+	robot.respond /schedule (.*)/i, (msg) ->
+		daySchedule(msg, robot.name)
 
 	robot.respond /((who'?s?|who is)\s*(?:speaking)?\s*now)/i, (msg) ->
   		currentSpeakers(msg)
