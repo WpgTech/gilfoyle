@@ -11,7 +11,7 @@
 # Commands:
 #   hubot who is speaking now? - Displays all presenters currently speaking
 #	hubot who is speaking next? - Displays all presenters speaking next
-#	hubot schedule - Displays full schedule
+#	hubot schedule (day)- Displays full schedule for requested day
 #
 # Author:
 #  Derek Richard
@@ -19,17 +19,18 @@
 
 needle = require('needle');
 cheerio = require('cheerio');
-moment = require("moment")
+moment = require("moment-timezone")
 _ = require('lodash')
 async = require('async')
 html2json = require('html2json').html2json
+table = require('easy-table')
 
-now = new moment()
+moment().tz("America/Winnipeg");
 
-retrieveSchedule = (day, callback) ->
+retrieveSchedule = (dayOfWeek, date, callback) ->
 	needle.get 'http://www.prdcdeliver.com/Schedule', (err, resp) ->
 		scheduleJSON = []
-		events = html2json(cheerio.load((resp.body).replace(/(?:\r\n|\r|\n)/g,""))('#' + day).children().html())
+		events = html2json(cheerio.load((resp.body).replace(/(?:\r\n|\r|\n)/g,""))('#' + dayOfWeek).children().html())
 		events = cleanArray(events.child)
 		_.forEach events, (event) ->
 			if event.tag != 'h2'
@@ -39,8 +40,8 @@ retrieveSchedule = (day, callback) ->
 				_.forEach timeslots, (timeslot) ->
 					if timeslot.tag == "h3"
 						times = /(\d*\:\d* (?:AM|PM)) \- (\d*\:\d* (?:AM|PM))/.exec(timeslot.child[0].text)
-						scheduleEvent.starttime = times[1]
-						scheduleEvent.endtime = times[2]
+						scheduleEvent.starttime = new moment(date + " " + times[1],'MMM D YYYY h:mm a')
+						scheduleEvent.endtime = new moment(date + " " + times[2],'MMM D YYYY h:mm a')
 					else if timeslot.tag != 'hr'
 						speaker = cleanArray(timeslot.child)
 						speakerInfo = {}
@@ -49,29 +50,67 @@ retrieveSchedule = (day, callback) ->
 						speakerInfo.title = speaker[1].child[0].text.trim()
 						scheduleEvent.speakers.push(speakerInfo)
 				scheduleJSON.push(scheduleEvent)
-		callback null, scheduleJSON
+		callback scheduleJSON
 		
 cleanArray = (array) ->
 	_.filter array, (event) ->
 			return !event.text || event.text.trim() == null
 
 buildScheduleJSON = (cb) ->
-	async.parallel {
-		wednesday: (cb) ->
-			retrieveSchedule 'Wednesday', cb
-		thursday: (cb) ->
-			retrieveSchedule 'Thursday', cb
-	}, (err, results) ->
-		if err
-			console.log("ERROR" + err)
-		else
+	retrieveSchedule 'Wednesday','Oct 12 2016', (results) ->
+		retrieveSchedule 'Thursday','Oct 13 2016', (thuResults) ->
+			Array.prototype.push.apply(results, thuResults);
 			cb results
 
-fullSchedule = (msg) ->
-	buildScheduleJSON (scheduleData) ->
-		console.log(scheduleData)
+formatData = (data) ->
+	schedule = ""
+	_.forEach data, (timeslot) ->
+		schedule += timeslot.starttime.format('h:mm A') + " - " + timeslot.endtime.format('h:mm A') + "\n"
+		t = new table
+		_.forEach timeslot.speakers, (speaker) ->
+			t.cell 'Title', speaker.title
+			t.cell 'Location', speaker.location
+			t.cell 'Speaker', speaker.name 
+			t.newRow()
+		schedule += t.print() + "\n"
+	return schedule
 
+daySchedule = (msg) ->
+	day = msg.match[1].replace /\w\S*/g, (txt) -> 
+		return txt.charAt(0).toUpperCase() + txt.substr(1,2).toLowerCase()
+	dayDisplay = if day=='Wed' then "Wednesday" else "Thursday"
+	buildScheduleJSON (scheduleData) ->
+		async.filter scheduleData, (timeslot, cb) ->
+			cb null, timeslot.starttime.format('ddd') == day
+		, (err, results) ->
+			msg.send "*Daily Schedule for #{dayDisplay}*```#{formatData(results)}```"
+
+currentSpeakers = (msg) ->
+	now = new moment()
+	buildScheduleJSON (scheduleData) ->
+		speakers = _.find scheduleData, (timeslot) ->
+			return timeslot.starttime.isBefore(now) && timeslot.endtime.isAfter(now)
+		if speakers
+			msg.send "*The following sessions are happening now*```#{formatData([speakers])}```"
+		else
+			msg.send "Currently there are no sessions"
+
+nextSpeakers = (msg) ->
+	now = new moment()
+	buildScheduleJSON (scheduleData) ->
+		speakers = _.find scheduleData, (timeslot) ->
+			return timeslot.starttime.isAfter(now)
+		if speakers
+			msg.send "*The following sessions are upcoming*```#{formatData([speakers])}```"
+		else
+			msg.send "There are no upcoming sessions"
 
 module.exports = (robot) ->
-  robot.respond /(schedule)/i, (msg) ->
-  	fullSchedule(msg)
+	robot.respond /schedule (Wed|Thu)\w*/i, (msg) ->
+  		daySchedule(msg)
+
+	robot.respond /((who'?s?|who is)\s*(?:speaking)?\s*now)/i, (msg) ->
+  		currentSpeakers(msg)
+
+	robot.respond /((who'?s?|who is)\s*(?:speaking)?\s*next)/i, (msg) ->
+  		nextSpeakers(msg)

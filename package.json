@@ -30,7 +30,7 @@
     "hubot-twitterstream-script": "neufeldtech/hubot-twitterstream-script",
     "hubot-wpgtransit": "^0.1.0",
     "lodash": "^4.16.4",
-    "moment": "^2.15.1",
+    "moment-timezone": "^0.5.6",
     "needle": "^1.1.2"
   },
   "scripts": {
