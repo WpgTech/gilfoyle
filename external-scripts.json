@@ -4,5 +4,6 @@
     "hubot-stache",
     "hubot-twitterstream-script",
     "hubot-wpgtransit",
-    "hubot-help"
+    "hubot-help",
+    "hubot-plusplus"
 ]
