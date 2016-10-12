@@ -20,6 +20,7 @@
   "dependencies": {
     "async": "^2.0.1",
     "cheerio": "^0.22.0",
+    "coffee-script": "^1.11.1",
     "easy-table": "^1.0.0",
     "html2json": "^1.0.2",
     "hubot": "^2.19.0",
@@ -38,6 +39,14 @@
   },
   "scripts": {
     "start": "bin/hubot",
-    "test": "NODE_ENV=development npm install && echo 'wewt this is a test'"
+    "test": "NODE_ENV=development npm install && node_modules/.bin/mocha --recursive --timeout 5000 --compilers coffee:coffee-script/register test",
+    "test-watch": "NODE_ENV=development npm install && node_modules/.bin/mocha --reporter nyan --watch --recursive --timeout 5000 --compilers coffee:coffee-script/register test"
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.6",
+    "chai": "^3.5.0",
+    "co": "^4.6.0",
+    "hubot-test-helper": "^1.5.0",
+    "mocha": "^3.1.2"
   }
 }

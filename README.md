@@ -101,6 +101,27 @@ dropbox.com
 Some scripts need environment variables set for API keys or other secrets.
 If you want to install a scripts that has special requirements, reach out to the **#chatops** channel in the [Prairie Tech Slack Instance](http://slack.prdcdeliver.com) and someone there can help you out. 
 
+
+## Testing
+You are encouraged, but not required, to write tests for your contributions to this bot. Tests are located in the `test` directory and you can run them with `npm run test`
+```
+$ npm run test
+
+  jokes hubot script
+    i am tired
+      ✓ should respond with caffeine
+    mcdonalds
+      ✓ should insist a big mac is delivered
+  
+  2 passing (16ms)
+```
+
+For more info on testing Hubot, you can check out the following resources:
+- [Testing Hubot Scripts](https://amussey.github.io/2015/08/11/testing-hubot-scripts.html) - Article by Andrew Mussey
+- [hubot-test-helper](https://github.com/mtsmfm/hubot-test-helper) npm package
+- [Testing a listener](https://github.com/waynegraham/hubot-memes/blob/master/test/memes_test.coffee) code example
+- [Mocking external HTTP calls](https://github.com/rick/hubot-graphme/blob/master/test/graph-me_test.coffee) code example
+
 ## What's next?
 - Check out the [Hubot scripting guide](https://hubot.github.com/docs/scripting/) for more details on how to get more out of your scripts.
 - Check out the `scripts` directory to see more examples.
