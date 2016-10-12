@@ -25,8 +25,6 @@ async = require('async')
 html2json = require('html2json').html2json
 table = require('easy-table')
 
-moment().tz("America/Winnipeg");
-
 retrieveSchedule = (dayOfWeek, date, callback) ->
 	needle.get 'http://www.prdcdeliver.com/Schedule', (err, resp) ->
 		scheduleJSON = []
@@ -40,8 +38,8 @@ retrieveSchedule = (dayOfWeek, date, callback) ->
 				_.forEach timeslots, (timeslot) ->
 					if timeslot.tag == "h3"
 						times = /(\d*\:\d* (?:AM|PM)) \- (\d*\:\d* (?:AM|PM))/.exec(timeslot.child[0].text)
-						scheduleEvent.starttime = new moment(date + " " + times[1],'MMM D YYYY h:mm a')
-						scheduleEvent.endtime = new moment(date + " " + times[2],'MMM D YYYY h:mm a')
+						scheduleEvent.starttime = new moment(date + " " + times[1],'MMM D YYYY h:mm a').tz('America/Winnipeg')
+						scheduleEvent.endtime = new moment(date + " " + times[2],'MMM D YYYY h:mm a').tz('America/Winnipeg')
 					else if timeslot.tag != 'hr'
 						speaker = cleanArray(timeslot.child)
 						speakerInfo = {}
@@ -89,7 +87,7 @@ daySchedule = (msg, name) ->
 		msg.send "Uhh, the conference is only Wednesday and Thursday. You can ask me for something like `#{name} schedule wednesday`"
 
 currentSpeakers = (msg) ->
-	now = new moment()
+	now = new moment().tz('America/Winnipeg')
 	buildScheduleJSON (scheduleData) ->
 		speakers = _.find scheduleData, (timeslot) ->
 			return timeslot.starttime.isBefore(now) && timeslot.endtime.isAfter(now)
@@ -99,7 +97,7 @@ currentSpeakers = (msg) ->
 			msg.send "Currently there are no sessions"
 
 nextSpeakers = (msg) ->
-	now = new moment()
+	now = new moment().tz('America/Winnipeg')
 	buildScheduleJSON (scheduleData) ->
 		speakers = _.find scheduleData, (timeslot) ->
 			return timeslot.starttime.isAfter(now)
