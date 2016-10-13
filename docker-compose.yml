@@ -2,6 +2,8 @@ version: "2"
 services:
   hubot:
     image: wpgtech/gilfoyle:latest
+    volumes:
+      - /etc/localtime:/etc/localtime
     depends_on:
       - "redis"
     links:
