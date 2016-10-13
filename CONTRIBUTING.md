@@ -67,6 +67,7 @@ further defined and clarified by project maintainers.
 ### Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported by contacting the project team at help@neufeldtech.com. All
 reported by contacting the project team at jordan.neufeld@northfieldit.com. All
 complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. The project team is
